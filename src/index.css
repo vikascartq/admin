@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import "tailwindcss";
+@plugin './hero.ts';
+/* Note: You may need to change the path to fit your project structure */
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: "DM Sans", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --primary-color: #324467;
+  --dark-color: #211C37;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  /* height: 54px; */
+  border-radius: 8px;
+  color: #fff;
+  width: 100%;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: grayscale(1) brightness(1);
+  }
+}
+
+.input-field-base {
+  margin: .5rem 0;
+}
+
+.input-field-wrapper {
+  background-color: #fff;
+  border: 1px solid #dfdfe4;
+  padding: 0 1rem;
+  border-radius: 8px;
+  height: 42px;
+  box-shadow: none;
+}
+
+.ck.ck-editor__main .ck-editor__editable {
+  max-height: 200px;
+}
+
+.ck.ck-editor__main .ck-editor__editable p {
+  font-size: 14px;
+}
+
+.ck.ck-editor__main .ck-editor__editable h2 {
+  font-size: 20px;
+}
+
+
+.ck.ck-editor__main .ck-editor__editable h3 {
+  font-size: 18px;
+}
+
+
+.ck.ck-editor__main .ck-editor__editable h4 {
+  font-size: 16px;
+}
