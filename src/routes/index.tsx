@@ -4,6 +4,7 @@ import Layout from "@/dashboard/Layout";
 // import PaymentRequestIndex from "@/dashboard/payment-request/PaymentRequestIndex";
 // import SubCategoryIndex from "@/dashboard/sub-category/SubCategoryIndex";
 import CandidateIndex from "@/dashboard/candidates/CandidateIndex";
+import EnquiriesIndex from "@/dashboard/enquiries/EnquiriesIndex";
 import JobsIndex from "@/dashboard/jobs/JobsIndex";
 import TestimonialIndex from "@/dashboard/testimonials/TestimonialIndex";
 import Login from "@/onboarding/login/Login";
@@ -28,7 +29,7 @@ export default function Index() {
                         <Route path="/jobs" element={<JobsIndex />} />
                         <Route path="/candidate" element={<CandidateIndex />} />
                         <Route path="/testimonial" element={<TestimonialIndex />} />
-                        {/* <Route path="/payment" element={<PaymentRequestIndex />} /> */}
+                        <Route path="/enquiries" element={<EnquiriesIndex />} />
                     </Route>
                 </Route>
             </Routes>
