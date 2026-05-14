@@ -18,3 +18,10 @@ export interface ICandidateForm {
     skills: string[];
     id: string;
 }
+
+export interface ITestimonialForm {
+    role: string;
+    description: string;
+    name: string;
+    id: string;
+}

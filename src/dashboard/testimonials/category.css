@@ -1,0 +1,5 @@
+.editable-field{
+    box-shadow: 0 0 25px #686868;
+    border: 2px dashed #000;
+    border-radius: 4px;
+}

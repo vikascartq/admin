@@ -10,5 +10,10 @@ export default [
         name: "Candidate",
         link: "/candidate",
         Icon: AvailSeatIcon
+    },
+    {
+        name: "Testimonial",
+        link: "/testimonial",
+        Icon: AvailSeatIcon
     }
 ]

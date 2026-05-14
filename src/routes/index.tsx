@@ -5,6 +5,7 @@ import Layout from "@/dashboard/Layout";
 // import SubCategoryIndex from "@/dashboard/sub-category/SubCategoryIndex";
 import CandidateIndex from "@/dashboard/candidates/CandidateIndex";
 import JobsIndex from "@/dashboard/jobs/JobsIndex";
+import TestimonialIndex from "@/dashboard/testimonials/TestimonialIndex";
 import Login from "@/onboarding/login/Login";
 import OTP from "@/onboarding/otp/OTP";
 import { BrowserRouter, Route, Routes } from "react-router";
@@ -26,7 +27,7 @@ export default function Index() {
                     <Route element={<Layout />} >
                         <Route path="/jobs" element={<JobsIndex />} />
                         <Route path="/candidate" element={<CandidateIndex />} />
-                        {/* <Route path="/manage-content" element={<ManageContentIndex />} /> */}
+                        <Route path="/testimonial" element={<TestimonialIndex />} />
                         {/* <Route path="/payment" element={<PaymentRequestIndex />} /> */}
                     </Route>
                 </Route>
