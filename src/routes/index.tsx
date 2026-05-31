@@ -15,6 +15,9 @@ import PublicRoute from "./PublicRoute";
 import TrendsIndex from "@/dashboard/trends/TrendsIndex";
 import AddTrend from "@/dashboard/trends/AddTrend";
 import EditTrend from "@/dashboard/trends/EditTrend";
+import CaseStudyIndex from "@/dashboard/case-study/CaseStudyIndex";
+import AddCaseStudy from "@/dashboard/case-study/AddCaseStudy";
+import EditCaseStudy from "@/dashboard/case-study/EditCaseStudy";
 
 export default function Index() {
     return (
@@ -36,6 +39,9 @@ export default function Index() {
                         <Route path="/trends" element={<TrendsIndex />} />
                         <Route path="/trends/add" element={<AddTrend />} />
                         <Route path="/trends/:id/edit" element={<EditTrend />} />
+                        <Route path="/case-study" element={<CaseStudyIndex />} />
+                        <Route path="/case-study/add" element={<AddCaseStudy />} />
+                        <Route path="/case-study/:id/edit" element={<EditCaseStudy />} />
                     </Route>
                 </Route>
             </Routes>

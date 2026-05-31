@@ -25,5 +25,10 @@ export default [
         name: "Trends",
         link: "/trends",
         Icon: AvailSeatIcon
+    },
+    {
+        name: "Case Study",
+        link: "/case-study",
+        Icon: AvailSeatIcon
     }
 ]
