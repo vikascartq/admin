@@ -20,5 +20,10 @@ export default [
         name: "Enquiries",
         link: "/enquiries",
         Icon: AvailSeatIcon
+    },
+    {
+        name: "Trends",
+        link: "/trends",
+        Icon: AvailSeatIcon
     }
 ]

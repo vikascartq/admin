@@ -12,6 +12,9 @@ import OTP from "@/onboarding/otp/OTP";
 import { BrowserRouter, Route, Routes } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
+import TrendsIndex from "@/dashboard/trends/TrendsIndex";
+import AddTrend from "@/dashboard/trends/AddTrend";
+import EditTrend from "@/dashboard/trends/EditTrend";
 
 export default function Index() {
     return (
@@ -30,6 +33,9 @@ export default function Index() {
                         <Route path="/candidate" element={<CandidateIndex />} />
                         <Route path="/testimonial" element={<TestimonialIndex />} />
                         <Route path="/enquiries" element={<EnquiriesIndex />} />
+                        <Route path="/trends" element={<TrendsIndex />} />
+                        <Route path="/trends/add" element={<AddTrend />} />
+                        <Route path="/trends/:id/edit" element={<EditTrend />} />
                     </Route>
                 </Route>
             </Routes>
