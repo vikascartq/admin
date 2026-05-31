@@ -1,10 +1,13 @@
 import DeleteIcon from "@/svg/DeleteIcon";
 import DeleteModal from "@/ui/DeleteModal";
+import EditRowIcon from "@/svg/EditRowIcon";
 import { useDisclosure } from "@heroui/react";
 import { useContext } from "react";
+import { useNavigate } from "react-router";
 import { TrendsContext } from "./context/TrendsContext";
 
 export default function Trends() {
+    const navigate = useNavigate();
     const { isOpen: isOpenD, onOpen: onOpenD, onOpenChange: onOpenChangeD, onClose } = useDisclosure();
     const { formik, handleDelete, trendList, page, hasMore, handlePageChange } = useContext(TrendsContext);
 
@@ -13,8 +16,9 @@ export default function Trends() {
             <div className="p-4">
                 <div className="flex items-center justify-between h-9">
                     <div className="text-xl font-semibold">Trends</div>
+                    <button onClick={() => navigate("/trends/add")} className="primary-btn max-w-28 h-full text-sm">Add New</button>
                 </div>
-                <div className="overflow-x-auto border rounded-lg mt-4">
+                <div className="overflow-x-auto h-[calc(93vh-85px)]  border rounded-lg mt-4">
                     <table className="min-w-full">
                         <thead className="bg-gray-100">
                             <tr>
@@ -40,9 +44,15 @@ export default function Trends() {
                                         <td className="px-4 py-3">{item.subHeading || "-"}</td>
                                         <td className="px-4 py-3">{item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "-"}</td>
                                         <td className="px-4 py-3">
-                                            <div className="flex items-center justify-end gap-3">
+                                            <div className="flex items-center justify-end gap-x-4">
                                                 <button
-                                                    className="text-red-600 hover:text-red-800"
+                                                    type="button"
+                                                    onClick={() => navigate(`/trends/${item._id}/edit`)}
+                                                >
+                                                    <EditRowIcon />
+                                                </button>
+                                                <button
+                                                    className="text-blue-600 hover:text-blue-800"
                                                     onClick={() => {
                                                         formik.setFieldValue("_id", item._id);
                                                         onOpenD();
