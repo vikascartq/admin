@@ -1,4 +1,4 @@
-import { getAllCaseStudies, createCaseStudy, getCaseStudyDetails, updateCaseStudy, deleteCaseStudy } from "@/services/caseStudy.service";
+import { getAllCaseStudies, createCaseStudy, updateCaseStudy, deleteCaseStudy } from "@/services/caseStudy.service";
 import type { ICaseStudyForm } from "@/types/caseStudy.type";
 import type { CaseStudyListItem } from "@/dashboard/case-study/context/CaseStudyContext";
 import { addToast, useDisclosure } from "@heroui/react";
