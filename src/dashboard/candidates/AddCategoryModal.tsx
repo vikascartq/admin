@@ -168,6 +168,8 @@ export default function AddCategoryModal({
                                 </div>
 
                                 <Select
+
+                                
                                     classNames={{
                                         base: "input-field-base ",
                                         trigger: " input-field-wrapper data-[invalid=true]:!bg-white group-data-[focus=true]:!bg-white !bg-white data-[hover=true]:!bg-white",
@@ -208,24 +210,136 @@ export default function AddCategoryModal({
 
 
 const imageNameList = [
+    // Girl Black Images
     {
-        id: "male-image-1",
-        name: "male-image-1"
+        id: "girl-black-image-1",
+        name: "girl-black-image-1"
     },
     {
-        id: "male-image-2",
-        name: "male-image-2"
+        id: "girl-black-image-2",
+        name: "girl-black-image-2"
     },
     {
-        id: "male-image-3",
-        name: "male-image-3"
+        id: "girl-black-image-3",
+        name: "girl-black-image-3"
+    },
+    // Body Black Images
+    {
+        id: "boy-black-image-1",
+        name: "boy-black-image-1"
     },
     {
-        id: "female-image-1",
-        name: "female-image-1"
+        id: "boy-black-image-2",
+        name: "boy-black-image-2"
     },
     {
-        id: "female-image-2",
-        name: "female-image-2"
+        id: "boy-black-image-3",
+        name: "boy-black-image-3"
     },
+    {
+        id: "boy-black-image-4",
+        name: "boy-black-image-4"
+    },
+    // Girl White Images
+    {
+        id: "girl-white-image-1",
+        name: "girl-white-image-1"
+    },
+    {
+        id: "girl-white-image-2",
+        name: "girl-white-image-2"
+    },
+    {
+        id: "girl-white-image-3",
+        name: "girl-white-image-3"
+    },
+    // Boy White Images
+    {
+        id: "boy-white-image-1",
+        name: "boy-white-image-1"
+    },
+    {
+        id: "boy-white-image-2",
+        name: "boy-white-image-2"
+    },
+    {
+        id: "boy-white-image-3",
+        name: "boy-white-image-3"
+    },
+    // Asian Girl  Images
+    {
+        id: "asian-girl-image-1",
+        name: "asian-girl-image-1"
+    },
+    {
+        id: "asian-girl-image-2",
+        name: "asian-girl-image-2"
+    },
+    {
+        id: "asian-girl-image-3",
+        name: "asian-girl-image-3"
+    },
+    // Asian Boy  Images
+    {
+        id: "asian-boy-image-1",
+        name: "asian-boy-image-1"
+    },
+    {
+        id: "asian-boy-image-2",
+        name: "asian-boy-image-2"
+    },
+    {
+        id: "asian-boy-image-3",
+        name: "asian-boy-image-3"
+    },
+    {
+        id: "asian-boy-image-4",
+        name: "asian-boy-image-4"
+    },
+    // middle East girl  Images
+    {
+        id: "middle-east-girl-image-1",
+        name: "middle-east-girl-image-1"
+    },
+    {
+        id: "middle-east-girl-image-2",
+        name: "middle-east-girl-image-2"
+    },
+    {
+        id: "middle-east-girl-image-3",
+        name: "middle-east-girl-image-3"
+    },
+    // middle East BOY  Images
+    {
+        id: "middle-east-boy-image-1",
+        name: "middle-east-boy-image-1"
+    },
+    {
+        id: "middle-east-boy-image-2",
+        name: "middle-east-boy-image-2"
+    },
+    {
+        id: "middle-east-boy-image-3",
+        name: "middle-east-boy-image-3"
+    },
+    // {
+    //     id: "male-image-1",
+    //     name: "male-image-1"
+    // },
+    // {
+    //     id: "male-image-2",
+    //     name: "male-image-2"
+    // },
+    // {
+    //     id: "male-image-3",
+    //     name: "male-image-3"
+    // },
+    // {
+    //     id: "female-image-1",
+    //     name: "female-image-1"
+    // },
+    // {
+    //     id: "female-image-2",
+    //     name: "female-image-2"
+    // },
 ]
