@@ -29,13 +29,13 @@ export default function useTestimonial() {
                 const resp = await updateTestimonial(val?.id, payload);
                 addToast({
                     title: resp?.data.message || "candidate updated",
-                    color: "success"
+                    severity: "success"
                 });
             } else {
                 const resp = await createTestimonial(payload);
                 addToast({
                     title: resp?.data.message || "candidate created",
-                    color: "success"
+                    severity: "success"
                 });
             }
             formik.resetForm();
@@ -64,7 +64,7 @@ export default function useTestimonial() {
         const resp = await deleteTestimonial(formik.values.id);
         addToast({
             title: resp?.data.message || "candidate deleted",
-            color: "success"
+            severity: "success"
         });
         handleGetAllCategory();
     }

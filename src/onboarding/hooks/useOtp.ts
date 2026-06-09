@@ -29,7 +29,7 @@ export default function useOtp() {
             const resp = await verifyEmailOtp(payload);
             addToast({
                 title: resp?.data.message || "email otp verified",
-                color: "success"
+severity: "success"
             });
             setTimeout(() => {
                 sessionStorage.removeItem("aid");

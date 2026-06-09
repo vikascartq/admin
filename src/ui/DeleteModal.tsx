@@ -3,7 +3,7 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from
 export default function DeleteModal({ isOpen, onOpenChange, handleDelete, onClose }: DeleteModalProps) {
     return (
         <>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} disableAnimation={true} onClose={onClose}>
+            <Modal {...{ isOpen, onOpenChange, disableAnimation: true, onClose } as any}>
                 <ModalContent>
                     {(onClose) => (
                         <>

@@ -12,7 +12,7 @@ const MyEditor: React.FC<EditorProps> = ({ onChange, value }) => {
     return (
         <div>
             <CKEditor
-                editor={ClassicEditor}
+                editor={ClassicEditor as any}
                 data={value}
                 config={{
                     licenseKey: 'GPL',

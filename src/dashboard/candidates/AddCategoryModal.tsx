@@ -51,17 +51,13 @@ export default function AddCategoryModal({
 
     return (
         <>
-            <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                disableAnimation
-                classNames={{
-                    backdrop: "bg-[#32446740]"
-                }}
-                onClose={() => {
-                    formik.resetForm();
-                }}
-            >
+            <Modal {...{
+                isOpen,
+                onOpenChange,
+                disableAnimation: true,
+                classNames: { backdrop: "bg-[#32446740]" },
+                onClose: () => { formik.resetForm(); }
+            } as any}>
                 <ModalContent>
                     {() => (
                         <>
@@ -118,10 +114,10 @@ export default function AddCategoryModal({
                                         aria-label="Skills"
                                         placeholder="Add Skill"
                                         value={skillInput}
-                                        onChange={(e) =>
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                             setSkillInput(e.target.value)
                                         }
-                                        onKeyDown={(e) => {
+                                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                                             if (e.key === "Enter") {
                                                 e.preventDefault();
                                                 addSkill();
@@ -167,24 +163,22 @@ export default function AddCategoryModal({
                                     )}
                                 </div>
 
-                                <Select
-
-                                
-                                    classNames={{
+                                <Select {...({
+                                    classNames: {
                                         base: "input-field-base ",
                                         trigger: " input-field-wrapper data-[invalid=true]:!bg-white group-data-[focus=true]:!bg-white !bg-white data-[hover=true]:!bg-white",
-                                    }}
-                                    placeholder="Select an image name"
-                                    aria-label="Select an image name"
-                                    id="imageName"
-                                    {...formik.getFieldProps("imageName")}
-                                    isInvalid={!!formik.errors.imageName && formik.touched.imageName}
-                                    errorMessage={formik.touched.imageName && formik.errors.imageName}
-                                    selectedKeys={[formik.values.imageName]}
-                                >
-                                    {imageNameList.map((item) => (
+                                    },
+                                    placeholder: "Select an image name",
+                                    "aria-label": "Select an image name",
+                                    id: "imageName",
+                                    ...formik.getFieldProps("imageName"),
+                                    isInvalid: !!formik.errors.imageName && formik.touched.imageName,
+                                    errorMessage: formik.touched.imageName && formik.errors.imageName,
+                                    selectedKeys: [formik.values.imageName],
+                                    children: imageNameList.map((item) => (
                                         <SelectItem key={item.id}>{item.name}</SelectItem>
-                                    ))}
+                                    ))
+                                } as any)}>
                                 </Select>
 
                             </ModalBody>

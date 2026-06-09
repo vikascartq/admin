@@ -14,17 +14,13 @@ export default function JobDetailsModal({ isOpen, onOpenChange, enquiryDetails }
     const { handleJobStatus } = useContext(EnquiriesContext);
     return (
         <>
-            <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                disableAnimation
-                classNames={{
-                    backdrop: "bg-[#32446740]"
-                }}
-                onClose={() => {
-                    // formik.resetForm();
-                }}
-            >
+            <Modal {...{
+                isOpen,
+                onOpenChange,
+                disableAnimation: true,
+                classNames: { backdrop: "bg-[#32446740]" },
+                onClose: () => {}
+            } as any}>
                 <ModalContent>
                     {(onClose) => (
                         <>

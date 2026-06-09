@@ -27,7 +27,7 @@ export default function useLogin() {
             const resp = await adminLogin(val);
             addToast({
                 title: resp?.data.message || "OTP sent to mail!",
-                color: "success"
+                severity: "success"
             });
             setTimeout(() => {
                 sessionStorage.setItem("aid", val.email);

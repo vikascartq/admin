@@ -15,17 +15,13 @@ export default function GeneralDetailsModal({ isOpen, onOpenChange, enquiryDetai
 
     return (
         <>
-            <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                disableAnimation
-                classNames={{
-                    backdrop: "bg-[#32446740]"
-                }}
-                onClose={() => {
-                    // formik.resetForm();
-                }}
-            >
+            <Modal {...{
+                isOpen,
+                onOpenChange,
+                disableAnimation: true,
+                classNames: { backdrop: "bg-[#32446740]" },
+                onClose: () => {}
+            } as any}>
                 <ModalContent>
                     {(onClose) => (
                         <>

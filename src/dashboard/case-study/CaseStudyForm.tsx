@@ -49,14 +49,14 @@ export default function CaseStudyForm({ mode }: CaseStudyFormProps) {
             try {
                 if (mode === "edit" && params.id) {
                     const resp = await updateCaseStudy(params.id, payload);
-                    addToast({ title: resp?.data?.message || "Case study updated", color: "success" });
+                    addToast({ title: resp?.data?.message || "Case study updated", severity: "success" });
                 } else {
                     const resp = await createCaseStudy(payload);
-                    addToast({ title: resp?.data?.message || "Case study created", color: "success" });
+                    addToast({ title: resp?.data?.message || "Case study created", severity: "success" });
                 }
                 navigate("/case-study");
             } catch (error) {
-                addToast({ title: "Unable to save case study", color: "danger" });
+                addToast({ title: "Unable to save case study", severity: "danger" });
             }
         }
     });
@@ -75,7 +75,7 @@ export default function CaseStudyForm({ mode }: CaseStudyFormProps) {
                     const resp = await getCaseStudyDetails(caseStudyId);
                     const caseStudy = resp?.data?.data;
                     if (!caseStudy) {
-                        addToast({ title: "Case study not found", color: "danger" });
+                        addToast({ title: "Case study not found", severity: "danger" });
                         navigate("/case-study");
                         return;
                     }
@@ -95,7 +95,7 @@ export default function CaseStudyForm({ mode }: CaseStudyFormProps) {
                             : initialValues.content
                     });
                 } catch (err) {
-                    addToast({ title: "Unable to load case study", color: "danger" });
+                    addToast({ title: "Unable to load case study", severity: "danger" });
                     navigate("/case-study");
                 } finally {
                     setIsLoading(false);
@@ -110,7 +110,7 @@ export default function CaseStudyForm({ mode }: CaseStudyFormProps) {
         formik.setTouched({ title: true, subHeading: true, challenge: true, description: true });
 
         if (!formik.values.title.trim() || !formik.values.subHeading.trim() || !formik.values.challenge.trim() || !formik.values.description.trim()) {
-            addToast({ title: "Please complete step one", color: "danger" });
+            addToast({ title: "Please complete step one", severity: "danger" });
             return;
         }
         setStep(2);
@@ -276,7 +276,7 @@ export default function CaseStudyForm({ mode }: CaseStudyFormProps) {
                                                 placeholder="Enter section description"
                                                 aria-label={`${section.title} Description`}
                                                 value={section.description}
-                                                onChange={(event) => updateSectionField(index, "description", event.target.value)}
+                                                onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => updateSectionField(index, "description", event.target.value)}
                                             />
                                         </div>
                                         <div className="space-y-3">
@@ -303,7 +303,7 @@ export default function CaseStudyForm({ mode }: CaseStudyFormProps) {
                                                         aria-label={`${section.title} list item ${itemIndex + 1}`}
                                                         placeholder="List item"
                                                         value={item}
-                                                        onChange={(event) => updateSectionListItem(index, itemIndex, event.target.value)}
+                                                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateSectionListItem(index, itemIndex, event.target.value)}
                                                     />
                                                     <Button
                                                         type="button"

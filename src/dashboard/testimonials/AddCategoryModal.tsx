@@ -21,17 +21,13 @@ export default function AddCategoryModal({
 
     return (
         <>
-            <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                disableAnimation
-                classNames={{
-                    backdrop: "bg-[#32446740]"
-                }}
-                onClose={() => {
-                    formik.resetForm();
-                }}
-            >
+            <Modal {...{
+                isOpen,
+                onOpenChange,
+                disableAnimation: true,
+                classNames: { backdrop: "bg-[#32446740]" },
+                onClose: () => { formik.resetForm(); }
+            } as any}>
                 <ModalContent>
                     {() => (
                         <>

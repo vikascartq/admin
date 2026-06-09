@@ -46,42 +46,42 @@ axiosInstance.interceptors.response.use(
             case 400:
                 addToast({
                     title: data?.message || "Validation error",
-                    color: "danger"
+                    severity: "danger"
                 });
                 break;
 
             case 401:
                 addToast({
                     title: "Session expired. Please login.",
-                    color: "danger"
+                    severity: "danger"
                 });
                 break;
 
             case 403:
                 addToast({
                     title: data?.message || "Forbidden. No access.",
-                    color: "danger"
+                    severity: "danger"
                 });
                 break;
 
             case 404:
                 addToast({
                     title: data?.message || "Resource not found",
-                    color: "danger"
+                    severity: "danger"
                 });
                 break;
 
             case 500:
                 addToast({
                     title: data?.message || "Server error",
-                    color: "danger"
+                    severity: "danger"
                 });
                 break;
 
             default:
                 addToast({
                     title: data?.message || "Unknown error",
-                    color: "danger"
+                    severity: "danger"
                 });
         }
 

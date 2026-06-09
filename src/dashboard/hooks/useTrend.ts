@@ -45,13 +45,13 @@ export default function useTrend() {
                 const resp = await updateTrend(val?._id, payload);
                 addToast({
                     title: resp?.data.message || "Trend updated",
-                    color: "success"
+                    severity: "success"
                 });
             } else {
                 const resp = await createTrend(payload);
                 addToast({
                     title: resp?.data.message || "Trend created",
-                    color: "success"
+                    severity: "success"
                 });
             }
             formik.resetForm();
@@ -87,7 +87,7 @@ export default function useTrend() {
         const resp = await deleteTrend(formik.values._id);
         addToast({
             title: resp?.data.message || "Trend deleted",
-            color: "success"
+            severity: "success"
         });
         const nextPage = trendList.length === 1 && page > 1 ? page - 1 : page;
         await fetchTrendPage(nextPage);

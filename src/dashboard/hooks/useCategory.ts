@@ -28,13 +28,13 @@ export default function useCategory() {
                 const resp = await updateJob(val?.id, payload);
                 addToast({
                     title: resp?.data.message || "job updated",
-                    color: "success"
+                    severity: "success"
                 });
             } else {
                 const resp = await createJob(payload);
                 addToast({
                     title: resp?.data.message || "job created",
-                    color: "success"
+                    severity: "success"
                 });
             }
             formik.resetForm();
@@ -63,7 +63,7 @@ export default function useCategory() {
         const resp = await deleteJob(formik.values.id);
         addToast({
             title: resp?.data.message || "job deleted",
-            color: "success"
+            severity: "success"
         });
         handleGetAllCategory();
     }

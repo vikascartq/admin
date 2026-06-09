@@ -46,16 +46,16 @@ export default function useCaseStudy() {
       try {
         if (values._id) {
           const resp = await updateCaseStudy(values._id, payload);
-          addToast({ title: resp?.data?.message || "Case study updated", color: "success" });
+          addToast({ title: resp?.data?.message || "Case study updated", severity: "success" });
         } else {
           const resp = await createCaseStudy(payload);
-          addToast({ title: resp?.data?.message || "Case study created", color: "success" });
+          addToast({ title: resp?.data?.message || "Case study created", severity: "success" });
         }
         formik.resetForm();
         onClose();
         await fetchCaseStudyPage(page);
       } catch (error) {
-        addToast({ title: "Unable to save case study", color: "danger" });
+        addToast({ title: "Unable to save case study", severity: "danger" });
       }
     }
   });
@@ -85,7 +85,7 @@ export default function useCaseStudy() {
       return;
     }
     const resp = await deleteCaseStudy(formik.values._id);
-    addToast({ title: resp?.data?.message || "Case study deleted", color: "success" });
+    addToast({ title: resp?.data?.message || "Case study deleted", severity: "success" });
     const nextPage = caseStudyList.length === 1 && page > 1 ? page - 1 : page;
     await fetchCaseStudyPage(nextPage);
   };

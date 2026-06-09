@@ -48,17 +48,13 @@ export default function AddCategoryModal({
 
     return (
         <>
-            <Modal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                disableAnimation
-                classNames={{
-                    backdrop: "bg-[#32446740]"
-                }}
-                onClose={() => {
-                    formik.resetForm();
-                }}
-            >
+            <Modal {...{
+                isOpen,
+                onOpenChange,
+                disableAnimation: true,
+                classNames: { backdrop: "bg-[#32446740]" },
+                onClose: () => { formik.resetForm(); }
+            } as any}>
                 <ModalContent>
                     {() => (
                         <>
@@ -118,10 +114,10 @@ export default function AddCategoryModal({
                                         aria-label="Skills"
                                         placeholder="Add Skill"
                                         value={skillInput}
-                                        onChange={(e) =>
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                             setSkillInput(e.target.value)
                                         }
-                                        onKeyDown={(e) => {
+                                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                                             if (e.key === "Enter") {
                                                 e.preventDefault();
                                                 addSkill();

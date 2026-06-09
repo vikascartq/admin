@@ -49,14 +49,14 @@ export default function TrendsForm({ mode }: TrendsFormProps) {
             try {
                 if (mode === "edit" && params.id) {
                     const resp = await updateTrend(params.id, payload);
-                    addToast({ title: resp?.data?.message || "Trend updated", color: "success" });
+                    addToast({ title: resp?.data?.message || "Trend updated", severity: "success" });
                 } else {
                     const resp = await createTrend(payload);
-                    addToast({ title: resp?.data?.message || "Trend created", color: "success" });
+                    addToast({ title: resp?.data?.message || "Trend created", severity: "success" });
                 }
                 navigate("/trends");
             } catch (error) {
-                addToast({ title: "Unable to save trend", color: "danger" });
+                addToast({ title: "Unable to save trend", severity: "danger" });
             }
         }
     });
@@ -75,7 +75,7 @@ export default function TrendsForm({ mode }: TrendsFormProps) {
                     const resp = await getAllTrendDetails(trendId);
                     const trend = resp?.data?.data;
                     if (!trend) {
-                        addToast({ title: "Trend not found", color: "danger" });
+                        addToast({ title: "Trend not found", severity: "danger" });
                         navigate("/trends");
                         return;
                     }
@@ -94,7 +94,7 @@ export default function TrendsForm({ mode }: TrendsFormProps) {
                             : [{ order: 1, heading: "", description: "", list: [] }]
                     });
                 } catch (err) {
-                    addToast({ title: "Unable to load trend", color: "danger" });
+                    addToast({ title: "Unable to load trend", severity: "danger" });
                     navigate("/trends");
                 } finally {
                     setIsLoading(false);
@@ -120,7 +120,7 @@ export default function TrendsForm({ mode }: TrendsFormProps) {
         formik.setTouched({ title: true, subHeading: true, description: true });
 
         if (Object.keys(errors).length > 0) {
-            addToast({ title: "Please complete step one", color: "danger" });
+            addToast({ title: "Please complete step one", severity: "danger" });
             return;
         }
         setStep(2);
@@ -302,7 +302,7 @@ export default function TrendsForm({ mode }: TrendsFormProps) {
                                                 aria-label={`Section ${index + 1} Heading`}
                                                 placeholder="Enter section heading"
                                                 value={section.heading}
-                                                onChange={(event) => updateSectionField(index, "heading", event.target.value)}
+                                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateSectionField(index, "heading", event.target.value)}
                                             />
                                         </div>
                                         <div>
@@ -317,7 +317,7 @@ export default function TrendsForm({ mode }: TrendsFormProps) {
                                                 placeholder="Enter section description"
                                                 aria-label="Description"
                                                 value={section.description}
-                                                onChange={(event) => updateSectionField(index, "description", event.target.value)}
+                                                onChange={(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => updateSectionField(index, "description", event.target.value)}
                                             />
                                         </div>
                                         <div className="space-y-3">
@@ -344,7 +344,7 @@ export default function TrendsForm({ mode }: TrendsFormProps) {
                                                         aria-label={`Section ${index + 1} list item ${itemIndex + 1}`}
                                                         placeholder="List item"
                                                         value={item}
-                                                        onChange={(event) => updateSectionListItem(index, itemIndex, event.target.value)}
+                                                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateSectionListItem(index, itemIndex, event.target.value)}
                                                     />
                                                     <Button
                                                         type="button"
