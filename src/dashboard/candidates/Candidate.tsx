@@ -4,7 +4,6 @@ import DeleteModal from "@/ui/DeleteModal";
 import { useDisclosure } from "@heroui/react";
 import { useContext } from "react";
 import AddCategoryModal from "./AddCategoryModal";
-import "./category.css";
 import { CandidateContext } from "./context/CandidateContext";
 
 export default function Candidate() {

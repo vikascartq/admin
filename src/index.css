@@ -4,14 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
   font-family: "DM Sans", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --primary-color: #324467;
-  --dark-color: #211C37;
 }
 
 * {
@@ -23,25 +20,26 @@ button {
   outline: none;
 }
 
+body {
+  @apply bg-white text-[#111827] dark:bg-[#0F172A] dark:text-[#F9FAFB];
+}
+
+/* Deprecated — preserved for page forms, will be removed after full migration */
 .primary-btn {
-  background-color: var(--primary-color);
-  /* height: 54px; */
+  background-color: #324467;
   border-radius: 8px;
   color: #fff;
   width: 100%;
   font-weight: 500;
   cursor: pointer;
-
-  &:disabled {
-    cursor: not-allowed;
-    filter: grayscale(1) brightness(1);
-  }
 }
-
+.primary-btn:disabled {
+  cursor: not-allowed;
+  filter: grayscale(1) brightness(1);
+}
 .input-field-base {
   margin: .5rem 0;
 }
-
 .input-field-wrapper {
   background-color: #fff;
   border: 1px solid #dfdfe4;
@@ -49,6 +47,9 @@ button {
   border-radius: 8px;
   height: 42px;
   box-shadow: none;
+}
+.input-field {
+  font-size: 14px;
 }
 
 .ck.ck-editor__main .ck-editor__editable {
@@ -63,11 +64,9 @@ button {
   font-size: 20px;
 }
 
-
 .ck.ck-editor__main .ck-editor__editable h3 {
   font-size: 18px;
 }
-
 
 .ck.ck-editor__main .ck-editor__editable h4 {
   font-size: 16px;

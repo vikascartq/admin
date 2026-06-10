@@ -1,130 +1,92 @@
-import {
-    Button,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader
-} from "@heroui/react";
 import { useContext } from "react";
-import type { IJobEnquiriesList } from "../hooks/useEnquiries";
 import { EnquiriesContext } from "./context/EnquiriesContext";
-
-export default function JobDetailsModal({ isOpen, onOpenChange, enquiryDetails }: JobDetailsModalProp) {
-    const { handleJobStatus } = useContext(EnquiriesContext);
-    return (
-        <>
-            <Modal {...{
-                isOpen,
-                onOpenChange,
-                disableAnimation: true,
-                classNames: { backdrop: "bg-[#32446740]" },
-                onClose: () => {}
-            } as any}>
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">
-                                Job Enquiry Details
-                            </ModalHeader>
-
-                            <ModalBody>
-                                <div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Name : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.name || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Email : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.email || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Company Name : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.companyName || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">WhatsApp Number : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.whatsAppNumber || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Job Title : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.jobTitle || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Expected Salary : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.expectedSalary || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Current Location : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.currentLocation || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Interested Job Title : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.interestedJobTitle || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Work Experience In Brief : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.workExperienceInBrief || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">CV : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            <a href={enquiryDetails?.cv} target="_blank" rel="noopener noreferrer">view</a>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Status : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.status || "--"}
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </ModalBody>
-
-                            <ModalFooter>
-                                <Button
-                                    className="primary-btn"
-                                    isDisabled={enquiryDetails?.status === "done"}
-                                    color="primary"
-                                    onPress={async () => {
-                                        if (enquiryDetails?._id) {
-                                            await handleJobStatus(enquiryDetails?._id);
-                                            onClose();
-                                        }
-                                    }}
-                                >
-                                    Mark as done
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
-        </>
-    )
-}
+import { BaseModal, Button } from "@/ui";
+import type { IJobEnquiriesList } from "../hooks/useEnquiries";
 
 interface JobDetailsModalProp {
-    isOpen: boolean;
-    onOpenChange: () => void;
-    enquiryDetails: IJobEnquiriesList | null;
+  isOpen: boolean;
+  onOpenChange: () => void;
+  enquiryDetails: IJobEnquiriesList | null;
+}
+
+export default function JobDetailsModal({
+  isOpen,
+  onOpenChange,
+  enquiryDetails,
+}: JobDetailsModalProp) {
+  const { handleJobStatus } = useContext(EnquiriesContext);
+
+  return (
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onOpenChange}
+      title="Job Enquiry Details"
+      size="md"
+      footer={
+        <Button
+          variant="primary"
+          disabled={enquiryDetails?.status === "done"}
+          onClick={async () => {
+            if (enquiryDetails?._id) {
+              await handleJobStatus(enquiryDetails._id);
+              onOpenChange();
+            }
+          }}
+        >
+          {enquiryDetails?.status === "done" ? "Already Done" : "Mark as Done"}
+        </Button>
+      }
+    >
+      <dl className="grid grid-cols-1 gap-4">
+        <DetailRow label="Name" value={enquiryDetails?.name} />
+        <DetailRow label="Email" value={enquiryDetails?.email} />
+        <DetailRow label="Company Name" value={enquiryDetails?.companyName} />
+        <DetailRow label="WhatsApp Number" value={enquiryDetails?.whatsAppNumber} />
+        <DetailRow label="Job Title" value={enquiryDetails?.jobTitle} />
+        <DetailRow label="Expected Salary" value={enquiryDetails?.expectedSalary} />
+        <DetailRow label="Current Location" value={enquiryDetails?.currentLocation} />
+        <DetailRow label="Interested Job Title" value={enquiryDetails?.interestedJobTitle} />
+        <DetailRow label="Work Experience" value={enquiryDetails?.workExperienceInBrief} />
+        <DetailRow
+          label="CV"
+          value={
+            enquiryDetails?.cv
+              ? undefined
+              : "--"
+          }
+        >
+          {enquiryDetails?.cv && (
+            <a
+              href={enquiryDetails.cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#3B82F6] dark:text-[#60A5FA] hover:underline"
+            >
+              View CV
+            </a>
+          )}
+        </DetailRow>
+        <DetailRow label="Status" value={enquiryDetails?.status} />
+      </dl>
+    </BaseModal>
+  );
+}
+
+function DetailRow({
+  label,
+  value,
+  children,
+}: {
+  label: string;
+  value?: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="grid grid-cols-[140px_1fr] gap-2">
+      <dt className="text-sm font-medium text-[#374151] dark:text-[#D1D5DB]">{label}:</dt>
+      <dd className="text-sm text-[#6B7280] dark:text-[#9CA3AF]">
+        {children || value || "--"}
+      </dd>
+    </div>
+  );
 }

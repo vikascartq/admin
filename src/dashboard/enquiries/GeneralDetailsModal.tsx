@@ -1,101 +1,59 @@
-import {
-    Button,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader
-} from "@heroui/react";
 import { useContext } from "react";
-import type { IGeneralEnquiriesList } from "../hooks/useEnquiries";
 import { EnquiriesContext } from "./context/EnquiriesContext";
-
-export default function GeneralDetailsModal({ isOpen, onOpenChange, enquiryDetails }: GeneralDetailsModalProp) {
-    const { handleGeneralStatus } = useContext(EnquiriesContext);
-
-    return (
-        <>
-            <Modal {...{
-                isOpen,
-                onOpenChange,
-                disableAnimation: true,
-                classNames: { backdrop: "bg-[#32446740]" },
-                onClose: () => {}
-            } as any}>
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">
-                                General Enquiry Details
-                            </ModalHeader>
-
-                            <ModalBody>
-                                <div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Name : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.name || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Email : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.email || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Company Name : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.companyName || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Phone Number : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.phoneNumber || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Message : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.message || "--"}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <div className="text-[14px]">Status : </div>
-                                        <div className="text-[14px] text-gray-500 font-medium">
-                                            {enquiryDetails?.status || "--"}
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </ModalBody>
-
-                            <ModalFooter>
-                                <Button
-                                    className="primary-btn"
-                                    isDisabled={enquiryDetails?.status === "done"}
-                                    color="primary"
-                                    onPress={async () => {
-                                        if (enquiryDetails?._id) {
-                                            await handleGeneralStatus(enquiryDetails?._id);
-                                            onClose();
-                                        }
-                                    }}
-                                >
-                                    Mark as done
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
-        </>
-    )
-}
+import { BaseModal, Button } from "@/ui";
+import type { IGeneralEnquiriesList } from "../hooks/useEnquiries";
 
 interface GeneralDetailsModalProp {
-    isOpen: boolean;
-    onOpenChange: () => void;
-    enquiryDetails: IGeneralEnquiriesList | null;
+  isOpen: boolean;
+  onOpenChange: () => void;
+  enquiryDetails: IGeneralEnquiriesList | null;
+}
+
+export default function GeneralDetailsModal({
+  isOpen,
+  onOpenChange,
+  enquiryDetails,
+}: GeneralDetailsModalProp) {
+  const { handleGeneralStatus } = useContext(EnquiriesContext);
+
+  return (
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onOpenChange}
+      title="General Enquiry Details"
+      size="md"
+      footer={
+        <Button
+          variant="primary"
+          disabled={enquiryDetails?.status === "done"}
+          onClick={async () => {
+            if (enquiryDetails?._id) {
+              await handleGeneralStatus(enquiryDetails._id);
+              onOpenChange();
+            }
+          }}
+        >
+          {enquiryDetails?.status === "done" ? "Already Done" : "Mark as Done"}
+        </Button>
+      }
+    >
+      <dl className="grid grid-cols-1 gap-4">
+        <DetailRow label="Name" value={enquiryDetails?.name} />
+        <DetailRow label="Email" value={enquiryDetails?.email} />
+        <DetailRow label="Company Name" value={enquiryDetails?.companyName} />
+        <DetailRow label="Phone Number" value={enquiryDetails?.phoneNumber} />
+        <DetailRow label="Message" value={enquiryDetails?.message} />
+        <DetailRow label="Status" value={enquiryDetails?.status} />
+      </dl>
+    </BaseModal>
+  );
+}
+
+function DetailRow({ label, value }: { label: string; value?: string }) {
+  return (
+    <div className="grid grid-cols-[140px_1fr] gap-2">
+      <dt className="text-sm font-medium text-[#374151] dark:text-[#D1D5DB]">{label}:</dt>
+      <dd className="text-sm text-[#6B7280] dark:text-[#9CA3AF]">{value || "--"}</dd>
+    </div>
+  );
 }

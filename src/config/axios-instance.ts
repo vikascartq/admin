@@ -16,7 +16,7 @@ export interface ErrResp {
 }
 
 const axiosInstance = axios.create({
-    baseURL: `${import.meta.env.VITE_BASE_URL}/api/v1`,
+    baseURL: `https://reqkingbackend.vikascircle.com/api/v1`,
     headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",

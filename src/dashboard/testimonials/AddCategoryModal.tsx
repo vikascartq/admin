@@ -1,123 +1,91 @@
 import type { AddCategoryModalProp } from "@/types/category.type";
-import {
-    Button,
-    Input,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    Textarea
-} from "@heroui/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { TestimonialContext } from "./context/TestimonialContext";
+import {
+  BaseModal,
+  Button,
+  TextInput,
+  TextArea,
+  FormSection,
+  FormFooter,
+} from "@/ui";
 
 export default function AddCategoryModal({
-    isOpen,
-    onOpenChange
+  isOpen,
+  onOpenChange,
 }: AddCategoryModalProp) {
+  const { formik } = useContext(TestimonialContext);
+  const [submitting, setSubmitting] = useState(false);
 
-    const { formik } = useContext(TestimonialContext);
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    await formik.submitForm();
+    setSubmitting(false);
+  };
 
-    return (
-        <>
-            <Modal {...{
-                isOpen,
-                onOpenChange,
-                disableAnimation: true,
-                classNames: { backdrop: "bg-[#32446740]" },
-                onClose: () => { formik.resetForm(); }
-            } as any}>
-                <ModalContent>
-                    {() => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">
-                                Create Testimonial
-                            </ModalHeader>
+  const handleClose = () => {
+    formik.resetForm();
+    onOpenChange();
+  };
 
-                            <ModalBody>
+  return (
+    <BaseModal
+      isOpen={isOpen}
+      onClose={handleClose}
+      title={formik.values.id ? "Edit Testimonial" : "Create Testimonial"}
+      size="md"
+      footer={
+        <FormFooter>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" loading={submitting} onClick={handleSubmit}>
+            {formik.values.id ? "Update Testimonial" : "Create Testimonial"}
+          </Button>
+        </FormFooter>
+      }
+    >
+      <div className="flex flex-col gap-8">
+        <FormSection title="Personal Information" description="Name and role of the person">
+          <TextInput
+            label="Name"
+            name="name"
+            placeholder="e.g. John Doe"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.errors.name}
+            touched={formik.touched.name}
+            required
+          />
 
-                                <Input
-                                    aria-label="name"
-                                    placeholder="Name"
-                                    type="text"
-                                    classNames={{
-                                        base: "input-field-base",
-                                        inputWrapper:
-                                            "input-field-wrapper data-[invalid=true]:!bg-white group-data-[focus=true]:!bg-white !bg-white data-[hover=true]:!bg-white",
-                                        input: "input-field !text-black"
-                                    }}
-                                    {...formik.getFieldProps("name")}
-                                    isInvalid={
-                                        !!formik.errors.name &&
-                                        formik.touched.name
-                                    }
-                                    errorMessage={
-                                        formik.touched.name &&
-                                        formik.errors.name
-                                    }
-                                />
+          <TextInput
+            label="Role"
+            name="role"
+            placeholder="e.g. CEO at Acme Inc."
+            value={formik.values.role}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.errors.role}
+            touched={formik.touched.role}
+          />
+        </FormSection>
 
-                                <Input
-                                    aria-label="Role"
-                                    placeholder="Role"
-                                    type="text"
-                                    classNames={{
-                                        base: "input-field-base",
-                                        inputWrapper:
-                                            "input-field-wrapper data-[invalid=true]:!bg-white group-data-[focus=true]:!bg-white !bg-white data-[hover=true]:!bg-white",
-                                        input: "input-field !text-black"
-                                    }}
-                                    {...formik.getFieldProps("role")}
-                                    isInvalid={
-                                        !!formik.errors.role &&
-                                        formik.touched.role
-                                    }
-                                    errorMessage={
-                                        formik.touched.role &&
-                                        formik.errors.role
-                                    }
-                                />
-
-                                <Textarea
-                                    aria-label="Description"
-                                    placeholder="Description"
-                                    type="text"
-                                    classNames={{
-                                        base: "input-field-base",
-                                        inputWrapper:
-                                            "input-field-wrapper data-[invalid=true]:!bg-white group-data-[focus=true]:!bg-white !bg-white data-[hover=true]:!bg-white",
-                                        input: "input-field !text-black"
-                                    }}
-                                    {...formik.getFieldProps("description")}
-                                    isInvalid={
-                                        !!formik.errors.description &&
-                                        formik.touched.description
-                                    }
-                                    errorMessage={
-                                        formik.touched.description &&
-                                        formik.errors.description
-                                    }
-                                />
-
-
-                            </ModalBody>
-
-                            <ModalFooter>
-                                <Button
-                                    className="primary-btn"
-                                    color="primary"
-                                    onPress={formik.submitForm}
-                                >
-                                    {formik.values.id
-                                        ? "Update"
-                                        : "Create"}
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal>
-        </>
-    );
+        <FormSection title="Testimonial" description="What they have to say">
+          <TextArea
+            label="Description"
+            name="description"
+            placeholder="Write the testimonial content here..."
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.errors.description}
+            touched={formik.touched.description}
+            rows={5}
+            required
+          />
+        </FormSection>
+      </div>
+    </BaseModal>
+  );
 }

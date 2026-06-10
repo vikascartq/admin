@@ -1,8 +1,6 @@
 .layout-sidebar {
     box-shadow: 0 14px 42px 0 #080F340F;
-    /* overflow-y: scroll; */
-    /* need comfirmation on it scroll padding */
-    overflow-y: hidden;
+    overflow-y: auto;
     transition: all .3s ease-in-out;
     z-index: 999;
 
@@ -42,7 +40,6 @@
         }
     }
 
-
     @media screen and (max-width:768px) {
         transform: translateX(-240px);
         margin-left: -100%;
@@ -75,48 +72,51 @@
     }
 }
 
-.sidebar__link__hover {
-    @media screen and (max-width:768px) {
-        padding: 11px 20px;
-        height: 50px;
-    }
+.nav-link {
+    padding: 0 20px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    position: relative;
+    border-left: 3px solid transparent;
 
     &:hover {
-        padding: 8px 6px;
-        background-color: var(--primary-color);
+        background-color: #324467;
+
+        .nav-label {
+            color: #ffffff !important;
+        }
 
         svg {
             path {
                 fill: white;
-                /* stroke: white; */
             }
         }
+    }
 
-        div {
-            color: white;
+    &.active {
+        background-color: #324467;
+        border-left-color: #60A5FA;
+
+        .nav-label {
+            color: #ffffff !important;
+        }
+
+        svg {
+            path {
+                fill: white;
+            }
         }
     }
 }
 
-/* .sidebar__link__hover.first-child {
-    &:hover {
-        svg {
-            path {
-                stroke: white;
-            }
-        }
-    }
-} */
+.nav-label {
+    color: #202020;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+}
 
-/* .sidebar__link__hover.first-child.active {
-    svg {
-        path {
-            stroke: white;
-        }
-    }
-} */
-
-.sidebar__link__hover.logout {
+.logout.nav-link {
     &:hover {
         svg {
             path {
@@ -124,55 +124,6 @@
                 fill: unset;
             }
         }
-    }
-}
-
-.sidebar__link__hover.Scholarship,
-.sidebar__link__hover.invite-friend {
-    &:hover {
-        padding: 8px 6px;
-        background-color: var(--primary-color);
-
-        svg {
-            path {
-                fill: white;
-                stroke: unset;
-            }
-        }
-
-        div {
-            color: white;
-        }
-    }
-}
-
-.sidebar__link__hover.active {
-    padding: 8px 6px;
-    background-color: var(--primary-color);
-
-    svg {
-        path {
-            fill: white;
-        }
-    }
-
-    div {
-        color: white;
-    }
-}
-
-.sidebar__link__hover.Scholarship.active {
-    svg {
-        path {
-            fill: white;
-            /* stroke: unset; */
-        }
-    }
-}
-
-.link__expand__icon {
-    svg {
-        width: 23px;
     }
 }
 
@@ -186,30 +137,14 @@
     }
 }
 
-/* .menu__logout__btn {
-    @media screen and (max-width:768px) {
-        border: 1px solid #EB7542;
-        border-radius: 16px;
-        width: 128px;
-        justify-content: center;
-        padding: 8px 20px;
-        letter-spacing: 0.5px;
-
-        svg {
-            display: none;
-        }
-    }
-} */
-
 /* responsive */
 .layout-sidebar {
-
     @media screen and (max-height:800px) and (min-width:768px) {
         .content__wrapper {
             gap: 14px;
         }
 
-        .sidebar__link__hover {
+        .nav-link {
             height: 36px;
         }
     }
