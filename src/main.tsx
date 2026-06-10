@@ -8,7 +8,7 @@ import Index from './routes/index.tsx';
 createRoot(document.getElementById('root')!).render(
   <AuthProvider>
     <HeroUIProvider>
-      <ToastProvider placement='top-right' />
+      <ToastProvider placement='top-center' />
       <Index />
     </HeroUIProvider>
   </AuthProvider>,
